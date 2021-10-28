@@ -4,6 +4,10 @@ namespace App\Controllers;
 
 class Auth extends BaseController
 {
+    public function __construct()
+    {
+        helper(['url', 'Form']);
+    }
     public function index()
     {
         return view('auth/login');
