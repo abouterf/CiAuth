@@ -17,6 +17,13 @@
 
             <form method="post" action="<?= base_url('auth/save') ?>">
                 <?= csrf_field(); ?>
+
+                <?php if (!empty(session()->getFlashData('fail'))) : ?>
+                    <div class="alert alert-danger"><?= session()->getFlashData('fail'); ?></div>
+                <?php endif; ?>
+                <?php if (!empty(session()->getFlashData('success'))) : ?>
+                    <div class="alert alert-success"><?= session()->getFlashData('success'); ?></div>
+                <?php endif; ?>
                 <div class="mb-3">
                     <label for="name" class="form-label">Name</label>
                     <input type="text" class="form-control" name="name" id="name" value="<?= set_value('name'); ?>">

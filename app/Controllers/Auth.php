@@ -2,6 +2,9 @@
 
 namespace App\Controllers;
 
+use App\Models\UserModel;
+use App\Libraries\Hash;
+
 class Auth extends BaseController
 {
     public function __construct()
@@ -62,7 +65,25 @@ class Auth extends BaseController
         if (!$validation) {
             return view('auth/register', ['validation' => $this->validator]);
         } else {
-            echo "form validated successfully";
+            $name = $this->request->getPost('name');
+            $email = $this->request->getPost('email');
+            $password = $this->request->getPost('password');
+
+
+            $values = [
+                'name' => $name,
+                'email' => $email,
+                'password' => Hash::make($password) ,
+            ];
+
+            $usersModel = new UserModel();
+            $query = $usersModel->insert($values);
+
+            if (!$query) {
+                return redirect()->back()->with('fail', 'Something went wrong');
+            } else {
+                return redirect()->to('auth/register')->with('success', 'You are now registered.');
+            }
         }
     }
 }
