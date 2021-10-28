@@ -19,17 +19,17 @@
                 <?= csrf_field(); ?>
                 <div class="mb-3">
                     <label for="name" class="form-label">Name</label>
-                    <input type="text" class="form-control" name="name" id="name">
+                    <input type="text" class="form-control" name="name" id="name" value="<?= set_value('name'); ?>">
                     <span class="text-danger"><?= isset($validation) ? displayError($validation, 'name') : ''; ?></span>
                 </div>
                 <div class="mb-3">
                     <label for="email" class="form-label">Email address</label>
-                    <input type="email" class="form-control" name="email" id="email">
+                    <input type="email" class="form-control" name="email" id="email" value="<?= set_value('email'); ?>">
                     <span class="text-danger"><?= isset($validation) ? displayError($validation, 'email') : ''; ?></span>
                 </div>
                 <div class="mb-3">
                     <label for="password" class="form-label">Password</label>
-                    <input type="password" class="form-control" name="password" id="password">
+                    <input type="password" class="form-control" name="password" id="password" value="<?= set_value('password'); ?>">
                     <span class="text-danger"><?= isset($validation) ? displayError($validation, 'password') : ''; ?></span>
 
                 </div>
