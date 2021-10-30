@@ -14,14 +14,24 @@
     <h4>Sign In</h4>
     <hr>
         <div class="row">
-            <form>
+            <form method="post" action="<?= base_url('auth/check') ?>" autocomplete="off">
+            <?php if (!empty(session()->getFlashData('fail'))) : ?>
+                    <div class="alert alert-danger"><?= session()->getFlashData('fail'); ?></div>
+                <?php endif; ?>
+                <?php if (!empty(session()->getFlashData('success'))) : ?>
+                    <div class="alert alert-success"><?= session()->getFlashData('success'); ?></div>
+                <?php endif; ?>
+            <?= csrf_field(); ?>
                 <div class="mb-3">
                     <label for="email" class="form-label">Email address</label>
-                    <input type="email" class="form-control" id="email">
+                    <input type="email" class="form-control" id="email" name="email" value="<?= set_value('email'); ?>">
+                    <span class="text-danger"><?= isset($validation) ? displayError($validation, 'email') : ''; ?></span>
                 </div>
                 <div class="mb-3">
                     <label for="password" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="password">
+                    <input type="password" class="form-control" id="password" name="password" value="<?= set_value('password'); ?>">
+                    <span class="text-danger"><?= isset($validation) ? displayError($validation, 'password') : ''; ?></span>
+
                 </div>
 
                 <button type="submit" class="btn btn-primary btn-block">Submit</button>
